@@ -1,0 +1,31 @@
+class Solution {
+    public int aggressiveCows(int[] stalls, int k) {
+        Arrays.sort(stalls);
+        int low=1,high=(stalls[stalls.length-1]-stalls[0]),min=0;
+        
+        while(low<=high)
+        {
+            int mid=(low+high)/2,i=0;
+            int c=0;
+            for(int j=0;j<stalls.length;j++)
+            {
+                if((stalls[j]-stalls[i])>=mid)
+                {
+                    c++;
+                    i=j;
+                }
+            }
+            if(c+1>=k)
+            {
+                low=mid+1;
+                min=mid;
+            }
+            else{
+                high=(mid-1);
+            }
+            
+        }
+        return min;
+        
+    }
+}
