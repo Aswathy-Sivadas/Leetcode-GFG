@@ -6,8 +6,9 @@ class Solution {
         while(low<=high)
         {
             int mid=(low+high)/2,i=0;
+            //cow always got the first position, so simply put c=1
             int c=1;
-            for(int j=0;j<stalls.length;j++)
+            for(int j=1;j<stalls.length;j++)
             {
                 if((stalls[j]-stalls[i])>=mid)
                 {
