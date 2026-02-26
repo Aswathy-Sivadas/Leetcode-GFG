@@ -1,0 +1,32 @@
+class Pair{
+    double distance;
+    int index;
+    Pair(double distance,int index)
+    {
+        this.distance=distance;
+        this.index=index;
+    }
+    
+}
+
+class Solution {
+    public double minMaxDist(int[] stations, int K) {
+        PriorityQueue<Pair> pq= new PriorityQueue<>(
+            (a,b)->Double.compare(b.distance,a.distance));
+        int n=stations.length;
+        if(n <= 1) return 0.0;
+        int[] howMany= new int[n-1];
+        for(int i=0;i<n-1;i++)
+        {
+            pq.add(new Pair(stations[i+1]-stations[i],i));
+        }
+        for(int i=1;i<=K;i++)
+        {
+            Pair top=pq.poll();
+            howMany[top.index]++;
+            double total=(stations[top.index+1]-stations[top.index]);
+            pq.add(new Pair((total/(howMany[top.index]+1)),top.index));
+        }
+        return pq.peek().distance;
+    }
+}
